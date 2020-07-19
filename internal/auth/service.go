@@ -196,7 +196,6 @@ func (s service) RevokeTokens(ctx context.Context, authInfo ContextData) error {
 		"accessToken":  authInfo.AccessToken,
 		"refreshToken": authInfo.RefreshToken,
 	})
-	fmt.Println("wtf", deleteResult.Err())
 	if deleteResult.Err() != nil && deleteResult.Err() != mongo.ErrNoDocuments {
 		return deleteResult.Err()
 	}
