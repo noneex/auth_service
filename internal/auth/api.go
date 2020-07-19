@@ -25,8 +25,8 @@ func RegisterHandlers(router *mux.Router, service Service) {
 	protectedRouter := router.NewRoute().Subrouter()
 	protectedRouter.Use(authRequired)
 	protectedRouter.HandleFunc("/refresh-tokens", refreshTokens(service)).Methods(http.MethodGet)
-	protectedRouter.HandleFunc("/revoke-tokens", revokeTokens(service)).Methods(http.MethodDelete)
-	protectedRouter.HandleFunc("/revoke-all-tokens", revokeAllTokens(service)).Methods(http.MethodDelete)
+	protectedRouter.HandleFunc("/revoke-tokens", revokeTokens(service)).Methods(http.MethodGet)
+	protectedRouter.HandleFunc("/revoke-all-tokens", revokeAllTokens(service)).Methods(http.MethodGet)
 }
 
 func login(service Service) http.HandlerFunc {

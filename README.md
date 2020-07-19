@@ -5,8 +5,8 @@ At this time, you have a RESTful API server running at `http://127.0.0.1:3000`. 
 
 * `POST /v1/login`: authenticate a user and generate a JWT | json(username, password) && "guid" header are required
 *	`GET /v1/refresh-tokens`: refresh tokens | authReq
-*	`DELETE /v1/revoke-tokens`: delete refresh token | authReq
-*	`DELETE /v1/revoke-all-tokens`: delete all refresh tokens | authReq
+*	`GET /v1/revoke-tokens`: delete refresh token | authReq
+*	`GET /v1/revoke-all-tokens`: delete all refresh tokens | authReq
 
 If you have `cURL` or some API client tools (e.g. [Postman](https://www.getpostman.com/)), you may try the following 
 more complex scenarios:
@@ -22,10 +22,10 @@ curl -X GET -b refreshToken.txt --cookie-jar refreshToken.txt -H "guid: ..guid..
 # should return the same as previous (POST /v1/login) route but with new values
 
 # delete current user's auth tokens
-curl -X DELETE -b refreshToken.txt -H "guid: ..guid.." -H "Authorization: Bearer ..accessToken.." http://localhost:3000/v1/revoke-tokens
+curl -X GET -b refreshToken.txt -H "guid: ..guid.." -H "Authorization: Bearer ..accessToken.." http://localhost:3000/v1/revoke-tokens
 # should return HTTP Status 204 (No Content)
 
 # delete current user's all auth tokens
-curl -X DELETE -b refreshToken.txt -H "guid: ..guid.." -H "Authorization: Bearer ..accessToken.." http://localhost:3000/v1/revoke-all-tokens
+curl -X GET -b refreshToken.txt -H "guid: ..guid.." -H "Authorization: Bearer ..accessToken.." http://localhost:3000/v1/revoke-all-tokens
 # should return HTTP Status 204 (No Content)
 ```
